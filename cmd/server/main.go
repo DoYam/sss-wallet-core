@@ -15,7 +15,9 @@ func main() {
 	}
 
 	http.HandleFunc("/sign", handlers.SignHandler)
+	http.HandleFunc("/wallet", handlers.WalletHandler)
+	http.HandleFunc("/verify", handlers.VerifyHandler)
 
-	fmt.Println("Listening on :8080")
+	fmt.Println("Server running on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
