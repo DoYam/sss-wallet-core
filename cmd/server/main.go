@@ -7,6 +7,7 @@ import (
 
 	"sss-wallet-core/core"
 	"sss-wallet-core/handlers"
+	"sss-wallet-core/internal"
 )
 
 func main() {
@@ -14,9 +15,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	http.HandleFunc("/sign", handlers.SignHandler)
-	http.HandleFunc("/wallet", handlers.WalletHandler)
-	http.HandleFunc("/verify", handlers.VerifyHandler)
+	http.HandleFunc("/sign", internal.WithCORS(handlers.SignHandler))
+	http.HandleFunc("/wallet", internal.WithCORS(handlers.WalletHandler))
+	http.HandleFunc("/verify", internal.WithCORS(handlers.VerifyHandler))
 
 	fmt.Println("Server running on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
